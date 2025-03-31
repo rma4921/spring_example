@@ -14,6 +14,7 @@ public class HelloController {
     // HelloService에서 @Service 어노테이션을 사용하여 new로 객새를 생성하지 않아도 된다.
     // 스프링에서 객체 관리
 
+    // 의존성 주입의 선행 조건: 빈 등록
     public HelloController(HelloService helloService) { // Dependency Injection 의존성 주입
         // HelloService helloService = new HelloController(); // 일반적인 흐름, 제어
         this.helloService = helloService; // 제어의 역전(IoC)
