@@ -13,7 +13,6 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		// 스프링 컨테이너가 관리하는 빈 조회
 		ApplicationContext context = new AnnotationConfigApplicationContext(DemoApplication.class);
-
 		String[] beanList = context.getBeanDefinitionNames();
 
 		System.out.println("===== 스프링 컨테이너가 관리하는 빈 목록 =====");
