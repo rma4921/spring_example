@@ -1,0 +1,24 @@
+### GET request to example server
+GET http://localhost:8080/members
+
+###
+POST localhost:8080/members
+Content-Type: application/json
+
+{
+  "name": "이름"
+}
+
+### 특정 id 값 조회
+GET http://localhost:8080/members/11
+
+### 특정 id 값 삭제
+DELETE localhost:8080/members/10
+
+### 특정 id 값 정보 수정
+PUT http://localhost:8080/members/11
+Content-Type: application/json
+
+{
+  "name": "바보"
+}
