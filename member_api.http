@@ -13,12 +13,43 @@ Content-Type: application/json
 GET http://localhost:8080/members/11
 
 ### 특정 id 값 삭제
-DELETE localhost:8080/members/10
+DELETE localhost:8080/members/16
 
 ### 특정 id 값 정보 수정
-PUT http://localhost:8080/members/11
+PUT http://localhost:8080/members/1
 Content-Type: application/json
 
 {
   "name": "바보"
 }
+
+### 회원 이름으로 조회
+GET http://localhost:8080/search/members?name=안녕
+
+### LIKE
+GET http://localhost:8080/search/members/like?name=안
+
+### 전체 팀 조회
+GET http://localhost:8080/teams
+
+### 특정 팀 조회
+GET http://localhost:8080/teams/1
+
+### 팀 row 추가하기
+POST localhost:8080/teams
+Content-Type: application/json
+
+{
+  "name": "FC 서울"
+}
+
+### 팀의 특정 id 값 정보 수정
+PUT http://localhost:8080/teams/5
+Content-Type: application/json
+
+{
+  "name": "레알 마드리드"
+}
+
+### 특정 id 값 삭제
+DELETE localhost:8080/teams/6

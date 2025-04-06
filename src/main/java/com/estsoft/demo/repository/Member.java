@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
+
 @Getter
 @Entity
 @AllArgsConstructor
@@ -17,4 +19,15 @@ public class Member {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    // fk : team_id
+    @ManyToOne(fetch = FetchType.LAZY) // 지연 로딩 : fetch = FetchType.LAZY
+    @JoinColumn(name = "team_id")
+    private Team team;
+
+    public void changeName(String name) {
+        this.name = name;
+    }
+//    @Temporal(TemporalType.TIMESTAMP)
+//    private Timestamp createAt;
 }

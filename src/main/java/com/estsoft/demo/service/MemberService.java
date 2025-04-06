@@ -2,6 +2,7 @@ package com.estsoft.demo.service;
 
 import com.estsoft.demo.repository.Member;
 import com.estsoft.demo.repository.MemberRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -39,4 +40,22 @@ public class MemberService {
         memberRepository.deleteById(id);
     }
 
+    public List<Member> selectMemberByName(String name) {
+        return memberRepository.findByName(name);
+    }
+
+    public List<Member> selectLikeMemberByName(String name) {
+        name = "%" + name + "%";
+        return memberRepository.findByNameLike(name);
+    }
+
+    @Transactional
+    public Member updateMember(Long id, String name) {
+        Optional<Member> optMember = memberRepository.findById(id)
+                .map(member -> {
+                    member.changeName(name);
+                    return member;
+                });
+        return optMember.orElseGet(Member::new);
+    }
 }
