@@ -1,6 +1,5 @@
 package com.estsoft.demo.repository;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 

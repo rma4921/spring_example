@@ -3,8 +3,6 @@ package com.estsoft.demo.controller;
 import com.estsoft.demo.repository.Team;
 import lombok.Getter;
 
-import java.util.List;
-
 @Getter
 public class TeamDTO {
     private Long teamId;
