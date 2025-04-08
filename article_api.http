@@ -3,8 +3,8 @@ POST http://localhost:8080/api/articles
 Content-Type: application/json
 
 {
-  "title" : "내일은",
-  "content" : "화요일이다...."
+  "title" : "오늘은",
+  "content" : "화요일"
 }
 
 ### GET 블로그 글 목록 전체 조회
@@ -12,3 +12,16 @@ GET http://localhost:8080/api/articles
 
 ### GET 블로그 글 단 건 조회
 GET http://localhost:8080/api/articles/4
+
+### DELETE 블로그 글 단 건 삭제
+DELETE http://localhost:8080/api/articles/13
+
+### PUT 블로그 글 단 건 수정
+PUT http://localhost:8080/api/articles/18
+Content-Type: application/json
+
+{
+  "title" : "업데이트된",
+  "content" : "데이터 더미"
+}
+
