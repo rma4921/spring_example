@@ -2,9 +2,12 @@ package com.estsoft.demo.blog.controller;
 
 import com.estsoft.demo.blog.Article;
 import com.estsoft.demo.blog.dto.AddArticleRequest;
+import com.estsoft.demo.blog.dto.UpdateArticleRequest;
 import com.estsoft.demo.blog.repository.BlogRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -16,8 +19,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -65,8 +68,6 @@ class BlogControllerTest {
         result.andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value(request.getTitle()))
                 .andExpect(jsonPath("$.content").value(request.getContent()));
-
-        System.out.println("종료");
     }
 
     // 전체 목록 조회 테스트 코드
@@ -109,5 +110,96 @@ class BlogControllerTest {
                 .andExpect(jsonPath("$.id").value(articleId))
                 .andExpect(jsonPath("$.title").value(savedArticle.getTitle()))
                 .andExpect(jsonPath("$.content").value(savedArticle.getContent()));
+    }
+
+    @Test
+    public void deleteArticleById() throws Exception {
+        // given
+        Article article = Article.builder()
+                .content("testContent")
+                .title("testTitle")
+                .build();
+        blogRepository.save(article);
+        Long id = article.getId();
+
+        //when
+        ResultActions resultActions = mockMvc.perform(delete("/api/articles/{id}", id));
+
+        //then
+        resultActions.andExpect(status().isOk());
+
+        List<Article> list = blogRepository.findAll();
+        Assertions.assertThat(list).isEmpty();
+        // Assertions.assertThat(list.size()).isEqualTo(0);
+    }
+
+    @Test
+    public void deleteAllArticles() throws Exception {
+        // given
+        Article article1 = Article.builder()
+                .title("title1")
+                .content("content1")
+                .build();
+        Article article2 = Article.builder()
+                .title("title2")
+                .content("content2")
+                .build();
+
+        blogRepository.save(article1);
+        blogRepository.save(article2);
+
+        // when
+        ResultActions resultActions = mockMvc.perform(delete("/api/articles"));
+
+        // then
+        resultActions.andExpect(status().isOk());
+
+        List<Article> articles = blogRepository.findAll();
+        Assertions.assertThat(articles).isEmpty();
+    }
+
+    @Test
+    public void updateArticle() throws Exception {
+        // given : 게시글 추가, id 추출, 수정할 값 세팅
+        Article article = Article.builder()
+                .title("title")
+                .content("content")
+                .build();
+        blogRepository.save(article);
+        Long id = article.getId();
+        // request 생성 | 직렬화(object -> json)
+        UpdateArticleRequest request = new UpdateArticleRequest("updateTitle", "updateContent");
+        String requestBody = new ObjectMapper().writeValueAsString(request);
+
+        // when
+        ResultActions resultActions = mockMvc.perform(put("/api/articles/{id}", id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody));
+
+        // then
+        resultActions.andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value(request.getTitle()))
+                .andExpect(jsonPath("$.content").value(request.getContent()));
+
+        Article article1 = blogRepository.findById(id).orElseThrow();
+        Assertions.assertThat(article1.getTitle()).isEqualTo(article.getTitle());
+        Assertions.assertThat(article1.getContent()).isEqualTo(article.getContent());
+    }
+
+    @DisplayName("400 예외 확인 테스트")
+    @Test
+    public void updateArticleBadRequest() throws Exception {
+        // given : 존재하지 않는 id 설정
+        Long invalidId = 0L;
+        UpdateArticleRequest request = new UpdateArticleRequest("updateTitle", "updateContent");
+        String requestBody = new ObjectMapper().writeValueAsString(request);
+
+        // when
+        ResultActions resultActions = mockMvc.perform(put("/api/articles/{id}", invalidId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody));
+
+        // then : 400 BAD_REQUEST 응답 확인
+        resultActions.andExpect(status().isBadRequest());
     }
 }

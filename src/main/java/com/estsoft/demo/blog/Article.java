@@ -31,6 +31,11 @@ public class Article {
         return new ArticleResponse(id, title, content);
     }
 
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
     // 빌더 패턴
 //    public Article(Builder builder) {
 //        this.title = builder.title;
