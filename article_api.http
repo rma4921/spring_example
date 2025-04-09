@@ -17,7 +17,7 @@ GET http://localhost:8080/api/articles/4
 DELETE http://localhost:8080/api/articles/13
 
 ### PUT 블로그 글 단 건 수정
-PUT http://localhost:8080/api/articles/18
+PUT http://localhost:8080/api/articles/28
 Content-Type: application/json
 
 {

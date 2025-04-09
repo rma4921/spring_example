@@ -5,8 +5,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+
 import java.util.Arrays;
 
+@EnableJpaAuditing     // createdAt, updatedAt 자동 업데이트
 @SpringBootApplication
 public class DemoApplication {
 

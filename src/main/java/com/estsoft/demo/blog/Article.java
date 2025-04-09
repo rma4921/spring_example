@@ -5,10 +5,16 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Entity
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class) // 엔티티의 변화를 감지하여 엔티티와 매핑된 테이블의 데이터를 조작.
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +26,12 @@ public class Article {
 
     @Column(nullable = false)
     private String content;
+
+    @CreatedDate
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 
     @Builder // 빌더 패턴 밑 모든 코드를 lombok으로 작성할 수 있음
     public Article(String title, String content) {

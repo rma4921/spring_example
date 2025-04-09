@@ -5,6 +5,19 @@
     <title>Title</title>
 </head>
 <body>
+    <h1>타임리프 학습</h1>
+    <p th:text="${#temporals.format(today, 'yyyy-MM-dd')}"></p> <!-- 2025-04-09 -->
+    <div th:object="${person}">  <!-- person객체 지정 -->
+        <p th:text="|이름: *{name}|"></p>  <!-- 이름: name  --> <!--|| 은 append 처럼 문자열을 연결해줌-->
+        <p th:text="|나이: *{age}|"></p>   <!-- 나이: age  -->
+        <p>취미</p>
+        <ul th:each="hobby : *{hobbies}"> <!-- hobbies 갯수만큼 반복 -->
+            <li th:text="${hobby}"></li>      <!-- 취미 출력 -->
+            <span th:if="${hobby == '여행'}">(대표취미)</span>   <!-- 특정 취미일경우, (대표취미) 노출-->
+        </ul>
 
-</body>
+    </div>
+
+    <a th:href="@{/api/articles/{id}(id=${person.id})}">글 보기</a>   <!-- 게시글 단건조회 id 지정해서 링크걸기--> <!--GET 요청-->
+    </body>
 </html>

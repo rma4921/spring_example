@@ -1,4 +1,4 @@
-package com.estsoft.demo.controller;
+package com.estsoft.demo.thymeleaf;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
