@@ -1,6 +1,6 @@
 package com.estsoft.demo.blog.dto;
 
-import com.estsoft.demo.blog.Article;
+import com.estsoft.demo.blog.domain.Article;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
