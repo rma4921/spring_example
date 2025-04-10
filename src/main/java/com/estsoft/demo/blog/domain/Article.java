@@ -1,4 +1,4 @@
-package com.estsoft.demo.blog;
+package com.estsoft.demo.blog.domain;
 
 import com.estsoft.demo.blog.dto.ArticleResponse;
 import jakarta.persistence.*;

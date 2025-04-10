@@ -1,8 +1,8 @@
-package com.estsoft.demo.thymeleaf.controller;
+package com.estsoft.demo.blog.controller;
 
-import com.estsoft.demo.blog.Article;
+import com.estsoft.demo.blog.domain.Article;
 import com.estsoft.demo.blog.service.BlogService;
-import com.estsoft.demo.thymeleaf.dto.ArticleViewResponse;
+import com.estsoft.demo.blog.dto.ArticleViewResponse;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
