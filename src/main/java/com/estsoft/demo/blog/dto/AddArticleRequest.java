@@ -1,6 +1,7 @@
 package com.estsoft.demo.blog.dto;
 
 import com.estsoft.demo.blog.domain.Article;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AddArticleRequest {
     private String title;
+
+    @JsonProperty("body")
     private String content;
 
     // AddArticleRequest -> Article Entity
