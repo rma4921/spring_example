@@ -1,6 +1,7 @@
 package com.estsoft.demo.blog.domain;
 
 import com.estsoft.demo.blog.dto.ArticleResponse;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Article {
     @Column(nullable = false)
     private String title;
 
+    @JsonProperty("body")
     @Column(nullable = false)
     private String content;
 
