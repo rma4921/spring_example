@@ -1,4 +1,4 @@
-package com.estsoft.demo.controller;
+package com.estsoft.demo.dto;
 
 import com.estsoft.demo.repository.Member;
 import lombok.Getter;
