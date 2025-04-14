@@ -73,11 +73,4 @@ public class BlogController {
         ArticleResponse response = article.toDTO();
         return ResponseEntity.ok(response);
     }
-
-    // PUT의 ID가 잘못됐을 때, Exception 처리
-    @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handlerIllegalArgumentException(IllegalArgumentException e) {
-        return e.getMessage();
-    }
 }
