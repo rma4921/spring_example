@@ -25,6 +25,8 @@ public class WebSecurityConfig {
                         auth.requestMatchers("/login", "/signup", "/user").permitAll()
                                 .requestMatchers("/books", "/books/**").permitAll() // 테스트용 나중에 삭제하기!!
                                 .requestMatchers("/api/external", "/api/external/test").permitAll() // 테스트용
+                                .requestMatchers("/api/articles", "/api/articles/**").permitAll()
+                                .requestMatchers("/test").permitAll()
                                 .requestMatchers("/new-article").hasRole("ADMIN")
                                 .anyRequest().authenticated())
                 .formLogin(auth -> auth.loginPage("/login") // 폼 기반 로그인 설정
