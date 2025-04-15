@@ -35,7 +35,7 @@ public class User implements UserDetails {
 
     @Override // 인가 처리
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority("ROLE_ADMIN")); // ROLE_USER면 안됨
     }
 
     @Override
