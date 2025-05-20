@@ -1,6 +1,7 @@
 package com.estsoft.demo.controller;
 
 import com.estsoft.demo.dto.MemberDTO;
+import com.estsoft.demo.dto.MemberRequest;
 import com.estsoft.demo.repository.Member;
 import com.estsoft.demo.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +30,9 @@ public class MemberController {
 
     @ResponseBody
     @PostMapping("/members")
-    public Member saveMember(@RequestBody Member member) {
-        return memberService.insertMember(member);
+    public MemberDTO saveMember(@RequestBody MemberRequest member) {
+        Member saveMember = memberService.insertMember(member.toEntity());
+        return new MemberDTO(saveMember);
     }
 
     // GET /members/{id} 특정 id 해당하는 값 가져오기 // findById 이용

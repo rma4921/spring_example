@@ -12,12 +12,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class WebSecurityConfig {
 
+
     @Bean
     public WebSecurityCustomizer configure() {      // 1. 스프링 시큐리티 기능 비활성화
         return web -> web.ignoring()
                 .requestMatchers("/static/**");
     }
-
     // 2. 특정 HTTP 요청에 대한 웹 기반 보안 구성
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {

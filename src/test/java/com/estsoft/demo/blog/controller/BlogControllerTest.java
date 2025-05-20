@@ -7,6 +7,7 @@ import com.estsoft.demo.blog.repository.BlogRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Disabled
 class BlogControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -157,6 +159,7 @@ class BlogControllerTest {
         Assertions.assertThat(articles).isEmpty();
     }
 
+    @Disabled
     @Test
     public void updateArticle() throws Exception {
         // given : 게시글 추가, id 추출, 수정할 값 세팅

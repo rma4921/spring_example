@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 public class AddArticleRequest {
     private String title;
 
-
     @JsonAlias({"body", "content"})
     private String content;
 
